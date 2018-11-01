@@ -1,0 +1,8 @@
+
+function dockerips {
+	for i in $(docker ps -q); do
+		IP=$(docker inspect -f {{.NetworkSettings.IPAddress}} $i)
+		NAME=$(docker inspect -f {{.Name}} $i)
+		printf "%-15s : %15s\n"  $NAME $IP
+	done
+}
